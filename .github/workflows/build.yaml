@@ -1,12 +1,47 @@
 name: Node.js CI
+<<<<<<< HEAD
 on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+=======
+on: 
+  push:
+    # branches: [ master ]
+  pull_request:
+    # branches: [ master ]
+env:
+  TEST: test
+  TEST2: test2
+jobs:
+  build:
+    env:
+      TEST: test_in_job
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    runs-on: ubuntu-latest
+    
+>>>>>>> 3a980a8cf1facdd1265c835e9604ac1369beb46b
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
       uses: actions/setup-node@v1
+<<<<<<< HEAD
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+=======
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Set variable
+      run: echo '::set-env name=TEST::in_step'
+    - run: echo ${{ env.TEST }}
+    - run: |
+        npm ci
+        npm run build --if-present
+    - run: npm test
+      if: ${{ success() }}
+>>>>>>> 3a980a8cf1facdd1265c835e9604ac1369beb46b
