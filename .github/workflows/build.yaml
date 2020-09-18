@@ -23,8 +23,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-    - run: echo ${{ env.TEST }}
     - name: Set variable
       run: echo '::set-env name=TEST::in_step'
     - run: echo ${{ env.TEST }}
